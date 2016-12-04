@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>My first Three.js app</title>
+		<style>
+			body { margin: 0; }
+			canvas { width: 100%; height: 100% }
+		</style>
+	</head>
+	<body>
+		<script src="js/three.js"></script>
+		<script src="js/font1.js"></script>
+		
+		<script>
+			// Our Javascript will go here.
+			function saveAsImage() {
+				var imgData, imgNode;
+
+				try {
+					var strMime = "image/jpeg";
+					imgData = renderer.domElement.toDataURL(strMime);
+
+					saveFile(imgData.replace(strMime, strMime), "test.jpg");
+
+				} catch (e) {
+					console.log(e);
+					return;
+				}
+
+			}
+			var saveFile = function (strData, filename) {
+				var link = document.createElement('a');
+				if (typeof link.download === 'string') {
+					document.body.appendChild(link); //Firefox requires the link to be in the body
+					link.download = filename;
+					link.href = strData;
+					link.click();
+					document.body.removeChild(link); //remove the link when done
+				} else {
+					location.replace(uri);
+				}
+			}
+			var saveLink = document.createElement('div');
+			saveLink.style.position = 'absolute';
+			saveLink.style.bottom = '10px';
+			saveLink.style.width = '100%';
+			saveLink.style.background = '#FFFFFF';
+			saveLink.style.textAlign = 'center';
+			saveLink.innerHTML =
+				'<a href="#" id="saveLink">Save Frame</a>';
+			document.body.appendChild(saveLink);
+			document.getElementById("saveLink").addEventListener('click', saveAsImage);
+			var scene = new THREE.Scene();
+			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+
+			 renderer = new THREE.WebGLRenderer({preserveDrawingBuffer: true});
+			renderer.setSize( window.innerWidth, window.innerHeight );
+			document.body.appendChild( renderer.domElement );
+
+			//var geometry = new THREE.BoxGeometry( 4, 6, 0.0001 );
+			//var material = new THREE.MeshBasicMaterial( { color: 0x00ff00 } );
+			//var cube = new THREE.Mesh( geometry, material );
+			var loader = new THREE.TextureLoader();
+			//scene.add( cube );
+			loader.load('./background.png', function ( texture ) {
+			  var geometry = new THREE.BoxGeometry( 3, 5, 0.0001 );
+			  var material = new THREE.MeshBasicMaterial({map: texture, overdraw: 0.5});
+			  var mesh = new THREE.Mesh(geometry, material);
+			  scene.add(mesh);
+			});
+			
+			loader.load('uploads/a.png', function ( texture ) {
+				var geometry = new THREE.CylinderGeometry( 0.45, 0.45, 0.001, 3000 );
+			
+				var material = new THREE.MeshBasicMaterial( {map: texture, overdraw: 0.5} );
+				var cylinder = new THREE.Mesh( geometry, material );
+			
+			
+				cylinder.translateZ( 0.001 );
+				cylinder.translateY(0.57);
+				cylinder.translateX(-0.58);
+				cylinder.rotateX(1.57);
+				cylinder.rotateY(1.57);
+				scene.add( cylinder );
+			});
+			loader.load('uploads/b.png', function ( texture ) {
+				var geometry = new THREE.CylinderGeometry( 0.45, 0.45, 0.001, 3000 );
+			
+				var material = new THREE.MeshBasicMaterial( {map: texture, overdraw: 0.5} );
+				var cylinder = new THREE.Mesh( geometry, material );
+			
+			
+				cylinder.translateZ( 0.001 );
+				cylinder.translateY(0.57);
+				cylinder.translateX(0.58);
+				cylinder.rotateX(1.57);
+				cylinder.rotateY(1.57);
+				scene.add( cylinder );
+			});
+			
+			
+			
+			
+			// Create a different scene to hold our buffer objects
+			//var bufferScene = new THREE.Scene();		
+			
+			//var bufferTexture = new THREE.WebGLRenderTarget( window.innerWidth, window.innerHeight, { minFilter: THREE.LinearFilter, magFilter: THREE.NearestFilter});
+			camera.position.z = 5;
+
+			var render = function () {
+				requestAnimationFrame( render );
+
+				//renderer.render(bufferScene, camera, bufferTexture);
+				
+
+				renderer.render(scene, camera);
+			};
+			render();
+		</script>
+	</body>
+</html>

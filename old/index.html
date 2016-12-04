@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<p>Create your dream "Its a Match!!!"</p>
+
+<form action="upload.php" method="post" enctype="multipart/form-data">
+
+your Name         - <input type="text" id="name1" name="name1" value="Hillary"> </p>
+    Select image to upload:
+    <input type="file" name="userfile[]" id="fileToUpload1" >
+    
+</p>
+your Friends Name - <input type="text" id="name2" name="name2" value="trump"> </p>
+    Select image to upload:
+    <input type="file" name="userfile[]" id="fileToUpload2">
+</p>
+<input type="submit" value="Upload Image" name="submit">
+</p>
+</form>
+
+</p>
+
+<button type="button" onclick="myFunction()">Try it</button>
+
+<script>
+
+function myFunction()
+{
+window.location.replace("./index2.html");
+}
+
+</script>
+
+</body>
+</html>
