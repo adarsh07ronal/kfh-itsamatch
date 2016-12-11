@@ -1,12 +1,18 @@
 <!DOCTYPE html>
-<html>
+<html lang="en" class="no-js">
 	<head>
 		<meta charset=utf-8>
 		<title>My first Three.js app</title>
-		<style>
-			body { margin: 0; }
-			canvas { width: 100%; height: 100% }
-		</style>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Custom File Inputs | Codrops</title>
+		<meta name="description" content="Demo for the tutorial: Styling and Customizing File Inputs the Smart Way" />
+		<meta name="keywords" content="cutom file input, styling, label, cross-browser, accessible, input type file" />
+		<meta name="author" content="Osvaldas Valutis for Codrops" />
+		<link rel="shortcut icon" href="favicon.ico">
+		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="css/demo.css" />
+		<link rel="stylesheet" type="text/css" href="css/component.css" />
 	</head>
 	<body>
 		<script src="js/three.js"></script>
@@ -42,19 +48,20 @@
 				}
 			}
 			var saveLink = document.createElement('div');
+			saveLink.class = "button";
 			saveLink.style.position = 'absolute';
 			saveLink.style.bottom = '10px';
 			saveLink.style.width = '100%';
-			saveLink.style.background = '#FFFFFF';
+			saveLink.style.background = '#dfc8ca';
 			saveLink.style.textAlign = 'center';
-			saveLink.innerHTML =
-				'<a href="#" id="saveLink">Save Frame</a>';
+			saveLink.innerHTML ="<a  class=\"button\" href=\"#\" id=\"saveLink\">Save Frame</a>";
 			document.body.appendChild(saveLink);
 			document.getElementById("saveLink").addEventListener('click', saveAsImage);
 			var scene = new THREE.Scene();
 			var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
 
 			 renderer = new THREE.WebGLRenderer({preserveDrawingBuffer: true});
+			 renderer.setClearColor( 0xdfc8ca);
 			renderer.setSize( window.innerWidth, window.innerHeight );
 			document.body.appendChild( renderer.domElement );
 
@@ -64,7 +71,7 @@
 			var loader = new THREE.TextureLoader();
 			//scene.add( cube );
 			loader.load('./background.png', function ( texture ) {
-			  var geometry = new THREE.BoxGeometry( 3, 5, 0.0001 );
+			  var geometry = new THREE.BoxGeometry( 2.75, 4.38, 0.0001 );
 			  var material = new THREE.MeshBasicMaterial({map: texture, overdraw: 0.5});
 			  var mesh = new THREE.Mesh(geometry, material);
 			  scene.add(mesh);
@@ -78,8 +85,8 @@
 			
 			
 				cylinder.translateZ( 0.001 );
-				cylinder.translateY(0.57);
-				cylinder.translateX(-0.58);
+				cylinder.translateY(0.0869);
+				cylinder.translateX(-0.525);
 				cylinder.rotateX(1.57);
 				cylinder.rotateY(1.57);
 				scene.add( cylinder );
@@ -92,8 +99,8 @@
 			
 			
 				cylinder.translateZ( 0.001 );
-				cylinder.translateY(0.57);
-				cylinder.translateX(0.58);
+				cylinder.translateY(0.0869);
+				cylinder.translateX(0.525);
 				cylinder.rotateX(1.57);
 				cylinder.rotateY(1.57);
 				scene.add( cylinder );
